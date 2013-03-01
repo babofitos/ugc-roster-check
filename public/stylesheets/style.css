@@ -1,0 +1,39 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#input-area {
+  width:1000px;
+  height:500px;
+}
+
+.hidden {
+  visibility:hidden;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-left: 1px solid black;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+}
+
+table tr {
+  display:block;
+  border-bottom: 1px solid black;
+}
+
+th {
+  text-align:left;
+  width:140px;
+}
+
+td {
+  width:140px;
+}

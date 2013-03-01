@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 UGC Roster Checker
+  h2.hidden#alert -
+  div#form-container
+    form(id="", method="post", action="/")
+      textarea(id="input-area", placeholder="Paste SteamIDs in here")
+      div
+        button(id="check-btn", type="button") Check
+  div#result-container
+    table.hidden#results
+      thead
+        tr
+          th SteamID
+          th Team
+      tbody#result-tbody

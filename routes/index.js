@@ -13,8 +13,10 @@ exports.parse = function(req, res) {
   })
 
   function getRosters(input, cb) {
-    if (!input.test(/\d+:\d+:\d+/)) {
-      return cb(true)
+    for (var j=0,leng=input.length;j<leng;j++) {
+      if (!input[j].test(/\d+:\d+:\d+/)) {
+        return cb(true)
+      }
     }
     request('http://ugcleague.com/rosters_tf2h.cfm', function(err, resp, body) {
       var teams = {}

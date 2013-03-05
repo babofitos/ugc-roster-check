@@ -19,44 +19,41 @@ submit.addEventListener('click', function(e) {
 
   //disable button to prevent multiple submissions
   submit.disabled = true
-  request.onreadystatechange = function() {
-    if (request.readyState === 4) {
-      if (request.status === 200) {
-        var data = JSON.parse(request.responseText)
-          , keys = Object.keys(data)
-          , tbody = document.getElementById('result-tbody')
-          , fragment = document.createDocumentFragment()
-          , tr
-          , td
-        
-        for (var i=0, len=keys.length;i<len;i++) {
-          tr = document.createElement('tr')
-          sidtd = document.createElement('td')
-          teamtd = document.createElement('td')
-          sidtd.appendChild(document.createTextNode(keys[i]))
-          if (!data[keys[i]]) {
-            teamtd.appendChild(document.createTextNode('None'))
-          } else {
-            teamtd.appendChild(document.createTextNode(data[keys[i]]))
-          }
-          tr.appendChild(sidtd)
-          tr.appendChild(teamtd)
-          fragment.appendChild(tr)
+  request.onload = function() {
+    if (request.status === 200) {
+      var data = JSON.parse(request.responseText)
+        , keys = Object.keys(data)
+        , tbody = document.getElementById('result-tbody')
+        , fragment = document.createDocumentFragment()
+        , tr
+        , td
+      
+      for (var i=0, len=keys.length;i<len;i++) {
+        tr = document.createElement('tr')
+        sidtd = document.createElement('td')
+        teamtd = document.createElement('td')
+        sidtd.appendChild(document.createTextNode(keys[i]))
+        if (!data[keys[i]]) {
+          teamtd.appendChild(document.createTextNode('None'))
+        } else {
+          teamtd.appendChild(document.createTextNode(data[keys[i]]))
         }
-        //show table
-        document.getElementById('results').classList.remove('hidden')
-        //reenable button
-        submit.disabled = false
-        //hide alert
-        alert.classList.add('hidden')
-        tbody.appendChild(fragment)
-      } else {
-        alert.innerHTML = 'Something bad happened'
-        alert.classList.remove('hidden')
-        submit.disabled = false
+        tr.appendChild(sidtd)
+        tr.appendChild(teamtd)
+        fragment.appendChild(tr)
       }
+      //show table
+      document.getElementById('results').classList.remove('hidden')
+      //reenable button
+      submit.disabled = false
+      //hide alert
+      alert.classList.add('hidden')
+      tbody.appendChild(fragment)
+    } else {
+      alert.innerHTML = 'Something bad happened'
+      alert.classList.remove('hidden')
+      submit.disabled = false
     }
-    
   }
   request.open('post', '/')
   request.setRequestHeader('Content-Type', 'application/json')

@@ -55,6 +55,11 @@ submit.addEventListener('click', function(e) {
       submit.disabled = false
     }
   }
+  request.onprogress = function(e) {
+    if (e.lengthComputable) {
+      console.log('received', e.position, 'of', e.totalSize)
+    }
+  }
   request.open('post', '/')
   request.setRequestHeader('Content-Type', 'application/json')
   request.send(JSON.stringify(matches))

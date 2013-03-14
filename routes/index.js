@@ -14,7 +14,7 @@ exports.parse = function(req, res) {
 
   function getRosters(input, cb) {
     for (var j=0,leng=input.length;j<leng;j++) {
-      if (!/\d+:\d+:\d+/.test(input[j])) {
+      if (!/0:\d+:\d+/.test(input[j])) {
         return cb(true)
       }
     }

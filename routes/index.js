@@ -13,9 +13,10 @@ exports.parse = function(req, res) {
   })
 
   function getRosters(input, cb) {
+    var validsids = []
     for (var j=0,leng=input.length;j<leng;j++) {
-      if (!/0:\d+:\d+/.test(input[j])) {
-        return cb(true)
+      if (/0:\d+:\d+/.test(input[j])) {
+        validsids.push(input[j])
       }
     }
     request('http://ugcleague.com/rosters_tf2h.cfm', function(err, resp, body) {
@@ -30,11 +31,11 @@ exports.parse = function(req, res) {
         })
         
         function getTeam(cb) {
-          var done = input.length
+          var done = validsids.length
             , teamsLength = 0
 
           for (var i=0; i<done;i++) {
-            var id = input[i]
+            var id = validsids[i]
               , len = $('.foottext').length-1
               , foundAll = false
 

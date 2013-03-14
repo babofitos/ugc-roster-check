@@ -1,15 +1,15 @@
 var submit = document.getElementById('check-btn') 
+  , alert = document.getElementById('alert')
 
+alert.classList.add('hidden')
 submit.addEventListener('click', function(e) {
   var request = new XMLHttpRequest()
     , sids = document.getElementById('input-area').value
     , matches = sids.match(/\d+:\d+:\d+/g)
-    , alert = document.getElementById('alert')
 
-  alert.classList.add('hidden')
+  alert.classList.remove('hidden')
 
   if (!matches) {
-    alert.classList.remove('hidden')
     alert.innerHTML = 'No valid STEAMID given'
     submit.disabled = false
     return
